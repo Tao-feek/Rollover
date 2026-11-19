@@ -95,7 +95,7 @@ button:disabled{opacity:.4;cursor:not-allowed}
 
 <script>
 var KEY="betRolloverPlannerV2",PER=10;
-var S={cap:10,odds:1.5,days:5,cur:"$",locked:false,attempt:1,won:0,history:[],best:0,page:0};
+var S={cap:10,odds:1.5,days:5,cur:"₦",locked:false,attempt:1,won:0,history:[],best:0,page:0};
 try{var raw=localStorage.getItem(KEY);if(raw){var p=JSON.parse(raw);if(p&&typeof p.won==="number")S=p;}}catch(e){}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 function r2(n){return Math.round(n*100)/100;}
@@ -107,7 +107,7 @@ function complete(){return S.locked&&S.won>=S.days;}
 function readDraft(){
   var c=parseFloat($("iCap").value),o=parseFloat($("iOdds").value),d=parseInt($("iDays").value,10);
   if(c>0)S.cap=c;if(o>1)S.odds=o;if(d>=1)S.days=d;
-  S.cur=$("iCur").value||"$";
+  S.cur=$("iCur").value||"₦";
   S.page=Math.min(S.page,pages()-1);
 }
 function onDraft(){if(S.locked)return;readDraft();S.won=0;save();render();}
@@ -164,7 +164,7 @@ function go(n){S.page=Math.max(0,Math.min(pages()-1,S.page+n));render();}
 function applySettings(){
   var c=parseFloat($("iCap").value),o=parseFloat($("iOdds").value),d=parseInt($("iDays").value,10);
   if(!(c>0)||!(o>1)||!(d>=1)){$("msg").textContent="Enter capital > 0, odds > 1 and at least 1 day.";return;}
-  S.cap=c;S.odds=o;S.days=d;S.cur=$("iCur").value||"$";
+  S.cap=c;S.odds=o;S.days=d;S.cur=$("iCur").value||"₦";
   $("msg").textContent="";S.locked=true;S.won=0;S.page=0;save();render();
 }
 function mark(win){
